@@ -3,11 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Product Application</title>
-    <!--<link rel="stylesheet" href="style.css">-->
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
     <div id="app">
-        <h1>{{ urlData.Name }}</h1>
+        <div class="product">
+            <h1>{{ urlData.Name }}</h1>
+            <div>
+                <span class="price">{{ price }}</span>
+                <span class="oldPrice">{{ oldPrice }}</span>
+                <span class="discount">{{ discount }}</span>
+            </div>
+            <div v-if="urlData.NewTag" class="newTag">NOVINKA</div>
+            <div class="wrapper-color">
+                <span class="bold">Farba:</span>
+                <span>{{ colorName }}</span>
+            </div>
+            <div>
+                <div class="wrapper-cart">
+                    <p>{{ cart }}</p>
+                </div>
+                <div v-on:click="cart += 1" class="add-to-cart-button">Pridať do košíka</div>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery"></script>
