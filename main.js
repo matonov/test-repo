@@ -4,7 +4,16 @@ var app = new Vue({
     el: '#app',
     data: {
         jsonData: [],
-        cart: 0
+        cart: 0,
+        colorsTranslateMap: {
+            'čierna': 'black',
+            'biela': 'white',
+            'červená': 'red',
+            'modrá': 'blue',
+            'žltá': 'yellow',
+            'fialová': 'purple'
+        },
+        colorName: 'čierna'
     },
     mounted () {
         axios
@@ -22,7 +31,29 @@ var app = new Vue({
             return getDiscount(this.jsonData.Discount);
         },
         colorName() {
-            return 'červená';
+            return this.colorName;
+        },
+        colors() {
+            if (this.jsonData == null || this.jsonData.params == null) {
+                return [];
+            }
+
+            return this.jsonData.params[1];
+        }
+    },
+    methods: {
+        colorFormatter: function (color) {
+            var resultStyle = {};
+            var resultColor = this.colorsTranslateMap[color];
+            if (resultColor === 'white') {
+                resultStyle.border = '1px solid black';
+            }
+            resultStyle.backgroundColor = resultColor;
+
+            return resultStyle;
+        },
+        selectColor: function (color) {
+            this.colorName = color;
         }
     }
 });

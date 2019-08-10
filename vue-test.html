@@ -16,8 +16,17 @@
             </div>
             <div v-if="jsonData.NewTag" class="newTag">NOVINKA</div>
             <div class="wrapper-color">
-                <span class="bold">Farba:</span>
-                <span>{{ colorName }}</span>
+                <div>
+                    <span class="bold">Farba:</span>
+                    <span>{{ colorName }}</span>
+                </div>
+                <div>
+                    <div v-for="color in colors"
+                        class="color-marker"
+                        :style="colorFormatter(color)"
+                        @click="selectColor(color)">
+                    </div>
+                </div>
             </div>
             <div>
                 <div class="wrapper-cart">
