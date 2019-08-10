@@ -1,27 +1,25 @@
-var dataURL = 'https://jsonstorage.net/api/items/aa5ea59c-da25-4c76-a8ad-c8f2cd825b27';
+var DATA_URL = 'https://jsonstorage.net/api/items/aa5ea59c-da25-4c76-a8ad-c8f2cd825b27';
 
 var app = new Vue({
     el: '#app',
     data: {
-        urlData: [],
+        jsonData: [],
         cart: 0
     },
-    mounted() {
-        var self = this
-        $.getJSON(dataURL, function(data) {
-            console.log(arguments);
-            self.urlData = data;
-        })
+    mounted () {
+        axios
+            .get(DATA_URL)
+            .then(response => (this.jsonData = response.data))
     },
     computed: {
         price() {
-            return getPrice(this.urlData.Price, this.urlData.CurrencyCode);
+            return getPrice(this.jsonData.Price, this.jsonData.CurrencyCode);
         },
         oldPrice() {
-            return getPrice(this.urlData.OldPrice, this.urlData.CurrencyCode);
+            return getPrice(this.jsonData.OldPrice, this.jsonData.CurrencyCode);
         },
         discount() {
-            return getDiscount(this.urlData.Discount);
+            return getDiscount(this.jsonData.Discount);
         },
         colorName() {
             return 'červená';
