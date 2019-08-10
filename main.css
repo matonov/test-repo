@@ -31,8 +31,11 @@
 }
 .wrapper-cart {
     display: inline-block;
-    margin: 15px;
+    margin: 0 10px;
 }
+.wrapper-cart input {
+    width: 30px;
+} 
 .add-to-cart-button {
     background-color: black;
     color: white;
@@ -53,4 +56,7 @@
     margin: 5px;
     border-radius: 50%;
     cursor: pointer;
+}
+.wrapper-star-rating {
+    margin: 30px 0;
 }

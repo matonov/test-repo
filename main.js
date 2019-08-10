@@ -1,9 +1,12 @@
+Vue.component('star-rating', VueStarRating.default);
+
 var DATA_URL = 'https://jsonstorage.net/api/items/aa5ea59c-da25-4c76-a8ad-c8f2cd825b27';
 
 var app = new Vue({
     el: '#app',
     data: {
         jsonData: [],
+        rating: 0,
         cart: 0,
         colorsTranslateMap: {
             'čierna': 'black',
@@ -13,12 +16,22 @@ var app = new Vue({
             'žltá': 'yellow',
             'fialová': 'purple'
         },
-        colorName: 'čierna'
+        colorName: ''
     },
     mounted () {
+        // nacitanie json data z API
         axios
             .get(DATA_URL)
-            .then(response => (this.jsonData = response.data))
+            .then(response => (this.jsonData = response.data));
+        // citanie premennych z localStorage
+        if (localStorage.colorName) {
+            this.colorName = localStorage.colorName;
+        }
+    },
+    watch: {
+        colorName(newColorName) {
+            localStorage.colorName = newColorName;
+        }
     },
     computed: {
         price() {

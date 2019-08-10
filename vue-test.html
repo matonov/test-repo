@@ -9,6 +9,12 @@
     <div id="app">
         <div class="product">
             <h1>{{ jsonData.Name }}</h1>
+            <div class="wrapper-star-rating">
+                <star-rating
+                    v-model="rating" 
+                    v-bind:star-size="20">
+                </star-rating>
+            </div>
             <div>
                 <span class="price">{{ price }}</span>
                 <span class="oldPrice">{{ oldPrice }}</span>
@@ -30,7 +36,7 @@
             </div>
             <div>
                 <div class="wrapper-cart">
-                    <p>{{ cart }}</p>
+                    <input type="text" v-model="cart"/>
                 </div>
                 <div v-on:click="cart += 1" class="add-to-cart-button">Pridať do košíka</div>
             </div>
@@ -39,6 +45,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue-star-rating/dist/star-rating.min.js"></script>
     <script src="main.js"></script>
 </body>
 </html>
