@@ -3,14 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Product Application</title>
-    <!--<link rel="stylesheet" href="style.css">-->
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
     <div id="app">
-        <h1>{{ product }}</h1>
+        <div class="product">
+            <h1>{{ jsonData.Name }}</h1>
+            <div class="wrapper-star-rating">
+                <star-rating
+                    v-model="rating" 
+                    v-bind:star-size="20">
+                </star-rating>
+            </div>
+            <div>
+                <span class="price">{{ price }}</span>
+                <span class="oldPrice">{{ oldPrice }}</span>
+                <span class="discount">{{ discount }}</span>
+            </div>
+            <div v-if="jsonData.NewTag" class="newTag">NOVINKA</div>
+            <div class="wrapper-color">
+                <div>
+                    <span class="bold">Farba:</span>
+                    <span>{{ colorName }}</span>
+                </div>
+                <div>
+                    <div v-for="color in colors"
+                        class="color-marker"
+                        :style="colorFormatter(color)"
+                        @click="selectColor(color)">
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="wrapper-cart">
+                    <input type="text" v-model="cart"/>
+                </div>
+                <div v-on:click="cart += 1" class="add-to-cart-button">Pridať do košíka</div>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue-star-rating/dist/star-rating.min.js"></script>
     <script src="main.js"></script>
 </body>
 </html>
